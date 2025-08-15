@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:48:03.296Z",
+  "updatedAt": "2025-08-15T19:48:03.296Z",
+  "id": "4Yn1xRWf7Wwm1ewz",
+  "name": "document-q&a-system-with-voyage-context-3-embeddings-and-mongodb-atlas.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "22aaa7d8-33dc-4076-9640-f4e681e454d7",
+  "triggerCount": 0,
+  "tags": []
+}

@@ -8,10 +8,7 @@
       "id": "placeholder-node-id",
       "name": "Placeholder Node",
       "type": "n8n-nodes-base.manualTrigger",
-      "position": [
-        0,
-        0
-      ],
+      "position": [0, 0],
       "parameters": {},
       "typeVersion": 1
     }

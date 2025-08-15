@@ -710,8 +710,8 @@
       }
     }
   },
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "96d56051-5442-4245-8ce4-d854b78a18c7",
   "triggerCount": 0,
   "tags": []

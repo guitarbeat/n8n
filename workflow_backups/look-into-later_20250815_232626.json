@@ -330,8 +330,8 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "6c186671-8ca7-4aa6-ba45-8636d3f1aa3f",
   "triggerCount": 0,
   "tags": []

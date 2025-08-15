@@ -929,6 +929,7 @@
     },
     "For Each Section...": {
       "main": [
+        null,
         [
           {
             "node": "Content Chunking @ 50k Chars",
@@ -1115,12 +1116,12 @@
       ]
     }
   },
-  "settings": {},
+  "settings": null,
   "staticData": null,
   "meta": {
     "templateId": "2341"
   },
-  "pinData": {},
+  "pinData": null,
   "versionId": "c4fa0183-32d9-423b-93f8-3f90ad8e11e1",
   "triggerCount": 0,
   "tags": []

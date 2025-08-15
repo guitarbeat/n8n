@@ -1451,8 +1451,8 @@
   },
   "settings": {},
   "staticData": null,
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "1688f3cd-714a-46fa-93c2-1ad3c05324d4",
   "triggerCount": 0,
   "tags": []

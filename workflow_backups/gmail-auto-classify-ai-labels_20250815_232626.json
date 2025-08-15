@@ -245,8 +245,8 @@
       }
     }
   },
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "bce19991-99e9-4de6-8e8b-c0bf3474971c",
   "triggerCount": 0,
   "tags": []

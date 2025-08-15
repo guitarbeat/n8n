@@ -1,0 +1,22 @@
+repos:
+  - repo: local
+    hooks:
+      - id: n8n-workflow-validator
+        name: n8n Workflow Validator
+        entry: python validate_n8n_workflows.py
+        language: system
+        types: [json]
+        files: ^workflow/.*\.json$
+        pass_filenames: false
+        always_run: true
+        stages: [commit]
+        description: "Validates n8n workflow JSON files for structural integrity"
+        
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-json
+        files: ^workflow/.*\.json$
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace

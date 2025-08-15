@@ -1322,8 +1322,8 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "9f1699dc-cc2d-494d-96c7-2754108fc167",
   "triggerCount": 0,
   "tags": []

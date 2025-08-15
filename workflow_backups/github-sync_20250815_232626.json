@@ -359,8 +359,8 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "78eb5edb-2afb-456b-9917-cb43aae06d8f",
   "triggerCount": 0,
   "tags": []

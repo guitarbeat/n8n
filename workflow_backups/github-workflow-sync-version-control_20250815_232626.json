@@ -811,8 +811,8 @@
   },
   "settings": {},
   "staticData": null,
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "9ee7f3e5-4f83-4165-a0e2-b5bf1b5186e8",
   "triggerCount": 0,
   "tags": []

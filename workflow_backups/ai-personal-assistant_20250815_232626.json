@@ -860,8 +860,8 @@
   },
   "settings": {},
   "staticData": null,
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "70b1882a-3324-40f4-b62e-59462f1a890c",
   "triggerCount": 0,
   "tags": []

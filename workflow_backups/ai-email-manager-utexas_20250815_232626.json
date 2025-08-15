@@ -1,8 +1,8 @@
 {
-  "createdAt": "2025-08-15T19:48:03.730Z",
-  "updatedAt": "2025-08-15T19:48:03.730Z",
-  "id": "nBgxrjfLkWuDWVMA",
-  "name": "AI Email Manager (gmail)",
+  "createdAt": "2025-08-12T19:39:37.349Z",
+  "updatedAt": "2025-08-15T06:54:20.000Z",
+  "id": "IN7XJcoap7gd98M1",
+  "name": "AI Email Manager (utexas)",
   "active": false,
   "isArchived": false,
   "nodes": [
@@ -20,18 +20,18 @@
           "q": "in:inbox -from:me newer_than:14d  -label:ai-processed"
         }
       },
-      "id": "f042a5ef-50f1-4e2f-a96c-bc274e1d97fe",
+      "id": "c26d055b-4bd4-4320-a125-e1d8edaa2709",
       "name": "Gmail Trigger",
       "type": "n8n-nodes-base.gmailTrigger",
       "position": [
         -2352,
-        76
+        144
       ],
       "typeVersion": 1.2,
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -39,29 +39,29 @@
       "parameters": {
         "amount": 1
       },
-      "id": "7ec90888-cb17-4be0-9fda-da93f94f6356",
+      "id": "3aa47e66-4441-4cab-97a3-fe6803b2adab",
       "name": "Wait",
       "type": "n8n-nodes-base.wait",
       "position": [
         -2128,
-        76
+        144
       ],
       "typeVersion": 1.1,
-      "webhookId": "20de8adc-7061-4428-9e0d-f25758a3ba54"
+      "webhookId": "37305aa3-1ff6-4408-9115-9f97befd75ae"
     },
     {
       "parameters": {
         "options": {
-          "maxOutputTokens": 1024,
-          "temperature": 0.3
+          "maxOutputTokens": 512,
+          "temperature": 0
         }
       },
-      "id": "e76ca824-2ebf-49db-b950-13f9db33cf5e",
+      "id": "72d474d0-fde9-4da8-8d8b-e184186dc6c3",
       "name": "Google Gemini Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "position": [
-        -536,
-        48
+        -1904,
+        368
       ],
       "typeVersion": 1,
       "credentials": {
@@ -78,19 +78,19 @@
         "resource": "label",
         "returnAll": true
       },
-      "id": "29196333-4ab0-40cf-ba1d-1ec59203f271",
+      "id": "56ff95e7-ce0e-4077-a8a5-d5be9f706f21",
       "name": "Gmail Read Labels",
       "type": "n8n-nodes-base.gmailTool",
       "position": [
-        -1776,
-        300
+        -1536,
+        544
       ],
       "typeVersion": 2.1,
-      "webhookId": "c8a52511-44d0-44b5-9fb2-5b731c48bb16",
+      "webhookId": "c34f2c23-d87a-4b0c-b280-f0a497d618bd",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -104,19 +104,19 @@
           "q": "=from:{{ $fromAI('email', 'Sender email address to search for') }}"
         }
       },
-      "id": "176d1790-dfc5-4e75-b46e-9822de1c1881",
+      "id": "2424950b-9eff-4ef1-bb60-801baf7d0f8b",
       "name": "Get Email History",
       "type": "n8n-nodes-base.gmailTool",
       "position": [
-        -1648,
-        300
+        -1520,
+        368
       ],
       "typeVersion": 2.1,
-      "webhookId": "e8ff0958-4492-48a6-a0b1-9fe7caee079b",
+      "webhookId": "9cf58ce3-1179-466f-b8d3-acf124554d90",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -132,19 +132,19 @@
           "q": "=to:{{ $fromAI('email', 'Recipient email address to search for') }}"
         }
       },
-      "id": "70f41604-ab71-4a6c-842a-9c9599f6a701",
+      "id": "eaf025f1-fee5-4d54-be86-e1cda40e38b8",
       "name": "Check Sent History",
       "type": "n8n-nodes-base.gmailTool",
       "position": [
-        -1520,
-        300
+        -1552,
+        720
       ],
       "typeVersion": 2.1,
-      "webhookId": "08211853-e5e3-44f7-b6b6-662e340433b0",
+      "webhookId": "4821fc71-6197-4280-810e-7ea7635a568f",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -156,19 +156,19 @@
         "messageId": "={{ $fromAI('message_id', 'Gmail message ID') }}",
         "labelIds": "={{ $fromAI('label_ids', 'Array of label IDs to add') }}"
       },
-      "id": "378f7e2b-3bbe-4503-9b1d-82d66cd77a44",
+      "id": "55d12e5c-58d4-4ffe-a5a6-06936fed76ca",
       "name": "Gmail Add Labels",
       "type": "n8n-nodes-base.gmailTool",
       "position": [
-        -1392,
-        300
+        -1360,
+        480
       ],
       "typeVersion": 2.1,
-      "webhookId": "53f47d6c-0127-4e4c-9341-e9eeac42aba7",
+      "webhookId": "998d629e-0f9d-46e0-ade7-a761a54a1ba3",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -177,16 +177,16 @@
         "promptType": "define",
         "text": "=Classify and label this email:\n{{ JSON.stringify($json) }}",
         "options": {
-          "systemMessage": "You are an advanced email classification agent. **Your email address:** aaronlorenzowoods@gmail.com\n\n**CRITICAL WORKFLOW:**\n1. **Get Available Labels** - Use Gmail Read Labels tool\n2. **Check Email History** - Use Get Email History tool for sender context\n3. **Check Sent History** - Use Check Sent History tool for relationship context\n4. **Analyze & Classify** - Apply unified FYI logic below\n5. **Apply Label** - Use Gmail Add Labels tool (or Create New Label only if ABSOLUTELY necessary)\n\n**UNIFIED CLASSIFICATION LOGIC:**\n**Core Principle:** Default to FYI (Label_5094129604402035640) for all non-actionable content. Only use specialized labels for truly exceptional cases.\n\n**ALWAYS APPLY THESE FIRST (order-sensitive):**\n1. Meeting/calendar content → Meeting Update (Label_14960927314977260)\n2. Comments/mentions → Comment (Label_5217055837795590799)\n3. Reply threads (Re:/Fwd:/In-Reply-To) → To Respond (Label_685184237340212596)\n\n**ALL OTHER EMAILS CLASSIFY AS:**\n→ FYI (Label_5094129604402035640)  \n*Includes but not limited to:*\n- Newsletters (subscribed/unsubscribed)\n- Service updates (known/unknown senders)\n- System notifications\n- Promotional content\n- Informational broadcasts\n- Business opportunities without personal action required\n- Content with List-Unsubscribe headers\n\n**LABEL CREATION RULES:**\n- Avoid creating new labels unless email fundamentally doesn't fit ANY existing category\n- Never create labels for Marketing/Newsletter/Notification subtypes\n- New labels must follow \"AI/[UniqueDescriptor]\" format\n\n**TOOL USAGE PRIORITY:**\n1. Apply classification logic FIRST\n2. Use history tools ONLY for ambiguity resolution\n3. Never run tools when classification is clear from content\n\n**RESPONSE CLASSIFICATION GUIDANCE:**\n- To Respond: When the email content suggests or requires a personal response from you\n- FYI: When the email is informational only, even if it's part of a thread\n-Use context clues: direct questions, requests for action, personal engagement expected",
+          "systemMessage": "You are an advanced email classification agent. **Your email address:** aaronlorenzowoods@gmail.com\n\n**CRITICAL WORKFLOW:**\n1. **Get Available Labels** - Use Gmail Read Labels tool\n2. **Check Email History** - Use Get Email History tool for sender context\n3. **Check Sent History** - Use Check Sent History tool for relationship context\n4. **Analyze & Classify** - Apply unified FYI logic below\n5. **Apply Label** - Use Gmail Add Labels tool (or Create New Label only if ABSOLUTELY necessary)\n\n**UNIFIED CLASSIFICATION LOGIC:**\n**Core Principle:** Default to FYI (Label_18) for all non-actionable content. Only use specialized labels for truly exceptional cases.\n\n**ALWAYS APPLY THESE FIRST (order-sensitive):**\n1. Meeting/calendar content → Meeting Update (Label_21)\n3. Reply threads (Re:/Fwd:/In-Reply-To) → To Respond (Label_20)\n\n**ALL OTHER EMAILS CLASSIFY AS:**\n→ FYI (Label_18)  \n*Includes but not limited to:*\n- Newsletters (subscribed/unsubscribed)\n- Service updates (known/unknown senders)\n- System notifications\n- Promotional content\n- Informational broadcasts\n- Business opportunities without personal action required\n- Content with List-Unsubscribe headers\n\n**LABEL CREATION RULES:**\n- Avoid creating new labels unless email fundamentally doesn't fit ANY existing category\n- Never create labels for Marketing/Newsletter/Notification subtypes\n- New labels must follow \"AI/[UniqueDescriptor]\" format\n\n**TOOL USAGE PRIORITY:**\n1. Apply classification logic FIRST\n2. Use history tools ONLY for ambiguity resolution\n3. Never run tools when classification is clear from content\n\n**RESPONSE CLASSIFICATION GUIDANCE:**\n- To Respond: When the email content suggests or requires a personal response from you\n- FYI: When the email is informational only, even if it's part of a thread\n-Use context clues: direct questions, requests for action, personal engagement expected",
           "maxIterations": 8
         }
       },
-      "id": "7e12304a-a86c-4754-b036-346074394076",
+      "id": "954ba3b5-a85a-4924-97bd-0bb4a12e7183",
       "name": "Email Classifier Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "position": [
-        -1656,
-        76
+        -1600,
+        144
       ],
       "typeVersion": 1.9
     },
@@ -195,12 +195,12 @@
         "sessionIdType": "customKey",
         "sessionKey": "={{ $json.id }}"
       },
-      "id": "94c5b6e5-8084-45b7-a44f-8d26e4776fb6",
+      "id": "775ff28f-5edc-47ec-acc3-19acbac1686c",
       "name": "Window Buffer Memory",
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "position": [
-        -1904,
-        300
+        -1728,
+        368
       ],
       "typeVersion": 1.3
     },
@@ -209,22 +209,22 @@
         "operation": "addLabels",
         "messageId": "={{ $node[\"Gmail Trigger\"].json[\"id\"] }}",
         "labelIds": [
-          "Label_5761679744339657261"
+          "Label_19"
         ]
       },
-      "id": "4b24d29b-3558-4602-bcbf-192fc11a7424",
+      "id": "5bf22b22-fc00-4463-81f9-0a811e7f3ffe",
       "name": "Mark as Processed",
       "type": "n8n-nodes-base.gmail",
       "position": [
-        -1056,
-        76
+        -1248,
+        144
       ],
       "typeVersion": 2.1,
-      "webhookId": "f9d6f240-557f-4c73-8329-30230ee55629",
+      "webhookId": "ad2687c3-45b6-4b26-bb0d-60833bb3ae1c",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -240,7 +240,7 @@
           "conditions": [
             {
               "leftValue": "={{ $json.labelIds }}.toString()",
-              "rightValue": "Label_685184237340212596",
+              "rightValue": "Label_20",
               "operator": {
                 "type": "string",
                 "operation": "contains"
@@ -252,14 +252,36 @@
         },
         "options": {}
       },
-      "id": "86ad43ad-2862-43c3-b405-922b532d94af",
+      "id": "450c5eb9-33e0-4575-81de-e12c02d49805",
       "name": "Check if To Respond",
       "type": "n8n-nodes-base.if",
       "position": [
-        -832,
-        -72
+        -928,
+        -64
       ],
       "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "id": "45c167a3-ecf2-4e57-918c-7b44b583f0f0",
+      "name": "Draft Gemini Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        -720,
+        64
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "J4oGy4Ra3BdgP6Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -271,12 +293,12 @@
           "maxIterations": 3
         }
       },
-      "id": "c473114a-cde9-4702-85a1-25d20600f85b",
+      "id": "68ac4775-b700-45c2-b205-2d4ad8f9e560",
       "name": "Draft Generator Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "position": [
-        -608,
-        -176
+        -704,
+        -160
       ],
       "typeVersion": 1.9
     },
@@ -290,19 +312,19 @@
           "sendTo": "={{ $('Gmail Trigger').item.json.To }}"
         }
       },
-      "id": "baab96eb-832d-4cda-8600-78dd3e89d0b9",
+      "id": "9e0e3c40-d6a0-4d8e-acbf-4b0958063700",
       "name": "Create Draft",
       "type": "n8n-nodes-base.gmail",
       "position": [
-        -256,
-        -72
+        -208,
+        -176
       ],
       "typeVersion": 2.1,
-      "webhookId": "947b7caf-56eb-48a3-aa5d-cbb62c9d323e",
+      "webhookId": "0aa2f994-7e2d-4036-8f2b-4df8622dbc98",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -315,19 +337,19 @@
         "name": "={{ $fromAI('new_label_name', 'Name for the new label to create') }}",
         "options": {}
       },
-      "id": "6a87a2d6-e99f-4d45-a08f-f2ab855c2845",
+      "id": "9260947e-7540-4c41-9b4a-d38f07bcfffd",
       "name": "Create New Label",
       "type": "n8n-nodes-base.gmailTool",
       "position": [
-        -1264,
-        300
+        -1376,
+        656
       ],
       "typeVersion": 2.1,
-      "webhookId": "96ebcdca-bac4-4fb3-8139-6cbdd60c225f",
+      "webhookId": "58c1524d-1f5a-4423-9851-e9e5b7235818",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -339,21 +361,90 @@
         "textBody": "=📧 *New Email Draft Created*\n\n*From:* {{ $('Email Classifier Agent').item.json.From }}\n*Subject:* {{ $('Email Classifier Agent').item.json.Subject }}\n*Classification:* To Respond\n\n*Draft Preview:*\n{{ $json.output.message.substring(0, 200) }}...\n\n✅ Ready for review in Gmail",
         "additionalFields": {}
       },
-      "id": "f25f78b9-56d5-4fe8-bb74-15a9aca901cb",
+      "id": "d7ed0429-b799-494e-a7e4-7394826087d8",
       "name": "WhatsApp Draft Notification",
       "type": "n8n-nodes-base.whatsApp",
       "position": [
         -32,
-        -72
+        -144
       ],
       "typeVersion": 1,
-      "webhookId": "965278f4-a6dd-490f-8ab1-4f7b1bc68465",
+      "webhookId": "5be5cd83-856b-4788-9cde-cc2e40a65ebf",
       "credentials": {
         "whatsAppApi": {
           "id": "FmV9Bw5YjjdJD25x",
           "name": "WhatsApp account"
         }
       }
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 512,
+          "temperature": 0
+        }
+      },
+      "id": "94e973dc-1c38-4d26-8bca-d733eca9b49b",
+      "name": "Marketing Gemini Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        -736,
+        608
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "J4oGy4Ra3BdgP6Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.labelIds }}.toString()",
+              "rightValue": "Label_18",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "id": "c25375b9-225c-4d48-8823-86ec7997fb5b"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "61d139ff-23fe-4424-a32e-8712c27dda92",
+      "name": "Check if FYI",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -928,
+        352
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"subject\": \"Re: Product roadmap meeting\",\n  \"message\": \"Hi Jordan,\\n\\nThanks for sharing the draft roadmap. I’m happy to review and align on priorities.\\n\\nCould we meet on Wed 2:00–2:30 PM PT, Thu 10:00–10:30 AM PT, or Fri 1:00–1:30 PM PT? If those don’t work, please suggest a few times that do.\\n\\nBefore we meet, could you confirm which metrics you’d like highlighted so I can prepare the latest numbers?\\n\\nBest regards,\\nAaron Lorenzo Woods\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -480,
+        16
+      ],
+      "id": "227b55b7-dc7d-4748-8454-1c4683087294",
+      "name": "Structured Output Parser"
     },
     {
       "parameters": {
@@ -389,12 +480,12 @@
         },
         "options": {}
       },
-      "id": "9a0ee76a-fc44-4096-b4db-b34bcaccbb51",
+      "id": "444bf6a1-a652-4dcb-8963-a05034768e0f",
       "name": "Check Mark as Read",
       "type": "n8n-nodes-base.if",
       "position": [
-        -32,
-        224
+        -192,
+        352
       ],
       "typeVersion": 2
     },
@@ -403,54 +494,34 @@
         "operation": "markAsRead",
         "messageId": "={{ $('Email Classifier Agent').item.json.id }}"
       },
-      "id": "1ddbcb84-cabb-465d-a92d-f41c494dd9ff",
+      "id": "87c09879-b7d6-42b9-8c3d-df358b2a19cd",
       "name": "Mark as Read",
       "type": "n8n-nodes-base.gmail",
       "position": [
-        192,
-        224
+        32,
+        352
       ],
       "typeVersion": 2.1,
       "webhookId": "c4e884f6-d6c0-4c06-9fcb-04761dd0edf1",
       "credentials": {
         "gmailOAuth2": {
-          "id": "NwIuiBTc5pvgThwX",
-          "name": "Gmail account"
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
         }
       }
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 1
-          },
-          "conditions": [
-            {
-              "leftValue": "={{ $json.labelIds }}.toString()",
-              "rightValue": "Label_5094129604402035640",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              },
-              "id": "c25375b9-225c-4d48-8823-86ec7997fb5b"
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
+        "jsCode": "// Step 1: Extract the raw JSON string (remove Markdown fences)\nconst rawJsonString = $input.first().json.output.replace(/```json\\n|\\n```/g, '').trim()\n// Step 2: Parse the JSON string\nconst parsedOutput = JSON.parse(rawJsonString);\n\n// Step 3: Return the mark_as_read value\nreturn {\n  should_mark_read: parsedOutput.mark_as_read // true/false\n};"
       },
-      "id": "91bd7601-e688-4398-8c68-1a067241fbee",
-      "name": "Check if FYI",
-      "type": "n8n-nodes-base.if",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        -832,
-        224
+        -400,
+        352
       ],
-      "typeVersion": 2
+      "id": "3c58ba0e-c84e-4f1e-93fe-061f74fee48a",
+      "name": "Code"
     },
     {
       "parameters": {
@@ -461,27 +532,14 @@
           "maxIterations": 3
         }
       },
-      "id": "e569eaa3-cfee-43c1-827d-597e814a291f",
-      "name": "FYI Analyzer Agent",
+      "id": "6436ab87-8dad-4333-bfe4-e6998a334451",
+      "name": "FYI Analyzer Agent1",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "position": [
-        -608,
-        224
+        -704,
+        320
       ],
       "typeVersion": 1.9
-    },
-    {
-      "parameters": {
-        "jsCode": "// Step 1: Extract the raw JSON string (remove Markdown fences)\nconst rawJsonString = $input.first().json.output.replace(/```json\\n|\\n```/g, '').trim()\n// Step 2: Parse the JSON string\nconst parsedOutput = JSON.parse(rawJsonString);\n\n// Step 3: Return the mark_as_read value\nreturn {\n  should_mark_read: parsedOutput.mark_as_read // true/false\n};"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -256,
-        224
-      ],
-      "id": "397b9cd2-44e6-46b9-a754-5d769db4d241",
-      "name": "Code"
     }
   ],
   "connections": {
@@ -512,16 +570,6 @@
         [
           {
             "node": "Email Classifier Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          },
-          {
-            "node": "FYI Analyzer Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          },
-          {
-            "node": "Draft Generator Agent",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -632,6 +680,22 @@
         ]
       ]
     },
+    "Draft Gemini Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Draft Generator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Create New Label": {
       "ai_tool": [
         [
@@ -654,12 +718,12 @@
         ]
       ]
     },
-    "Check Mark as Read": {
-      "main": [
+    "Marketing Gemini Model": {
+      "ai_languageModel": [
         [
           {
-            "node": "Mark as Read",
-            "type": "main",
+            "node": "FYI Analyzer Agent1",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -669,18 +733,29 @@
       "main": [
         [
           {
-            "node": "FYI Analyzer Agent",
+            "node": "FYI Analyzer Agent1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "FYI Analyzer Agent": {
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Draft Generator Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Mark as Read": {
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Mark as Read",
             "type": "main",
             "index": 0
           }
@@ -697,22 +772,43 @@
           }
         ]
       ]
+    },
+    "FYI Analyzer Agent1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {},
   "staticData": {
     "node:Gmail Trigger": {
       "Gmail Trigger": {
-        "lastTimeChecked": 1755235731,
+        "lastTimeChecked": 1755236646,
         "possibleDuplicates": [
-          "198ac33c98ee1627"
+          "198ac41c3848189b"
         ]
       }
     }
   },
-  "meta": {},
+  "meta": {
+    "templateId": "4722",
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {},
-  "versionId": "96d56051-5442-4245-8ce4-d854b78a18c7",
-  "triggerCount": 0,
-  "tags": []
+  "versionId": "f908ed49-fb02-458e-be88-903aabbb3db8",
+  "triggerCount": 1,
+  "tags": [
+    {
+      "createdAt": "2025-08-12T04:49:07.398Z",
+      "updatedAt": "2025-08-12T04:49:07.398Z",
+      "id": "KHvuAEm6Ijcek9tI",
+      "name": "Email"
+    }
+  ]
 }

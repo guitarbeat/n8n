@@ -367,8 +367,8 @@
       }
     }
   },
-  "meta": {},
-  "pinData": {},
+  "meta": null,
+  "pinData": null,
   "versionId": "452a90ee-1dd9-406b-8057-901ab27795bf",
   "triggerCount": 0,
   "tags": []

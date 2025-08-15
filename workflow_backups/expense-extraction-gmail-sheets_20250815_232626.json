@@ -197,12 +197,12 @@
       ]
     }
   },
-  "settings": {},
+  "settings": null,
   "staticData": null,
   "meta": {
     "templateId": "1466"
   },
-  "pinData": {},
+  "pinData": null,
   "versionId": "f318fe6c-63aa-45a4-9319-6d3ffbdeb744",
   "triggerCount": 0,
   "tags": []

@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:35:46.101Z",
+  "updatedAt": "2025-08-15T19:35:46.101Z",
+  "id": "Z6kOy5c2Em71ANAJ",
+  "name": "bidirectional-github-workflow-sync-&-version-control-for-n8n-workflows.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "905e84d7-e517-40c7-9510-c9b9251d6c56",
+  "triggerCount": 0,
+  "tags": []
+}

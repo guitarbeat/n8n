@@ -1,10 +1,10 @@
 {
   "createdAt": "2025-08-15T08:16:01.684Z",
-  "updatedAt": "2025-08-15T18:52:53.000Z",
+  "updatedAt": "2025-08-15T19:11:11.000Z",
   "id": "ICjYdYwhykHn3qnB",
   "name": "Github Sync",
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {},
@@ -363,7 +363,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "88ef9c54-88cb-450c-8a12-88bf288a6d10",
+  "versionId": "879ac312-0485-40c9-940b-8856091b4460",
   "triggerCount": 0,
   "tags": []
 }

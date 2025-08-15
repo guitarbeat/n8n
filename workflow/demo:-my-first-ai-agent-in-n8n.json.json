@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:35:46.094Z",
+  "updatedAt": "2025-08-15T19:35:46.094Z",
+  "id": "4ZIZTxwsB3zXacBd",
+  "name": "demo:-my-first-ai-agent-in-n8n.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "c1499bc8-600b-4748-86ca-8cf0fecb2f29",
+  "triggerCount": 0,
+  "tags": []
+}

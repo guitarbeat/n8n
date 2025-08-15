@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:17:13.152Z",
+  "updatedAt": "2025-08-15T19:17:13.152Z",
+  "id": "c0OX5uoFJmSDZlpn",
+  "name": "vision-rag-and-image-embeddings-using-cohere-command-a-and-embed-v4.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "d3c0fce7-2bd3-4dfa-ae79-379969e0166a",
+  "triggerCount": 0,
+  "tags": []
+}

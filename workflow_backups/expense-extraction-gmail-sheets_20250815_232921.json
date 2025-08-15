@@ -1,0 +1,209 @@
+{
+  "createdAt": "2025-08-12T20:24:21.065Z",
+  "updatedAt": "2025-08-12T20:24:57.000Z",
+  "id": "OLLDqYVclztWL1Bg",
+  "name": "Extract expenses from emails and add to Google Sheets",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "name": "Check subject",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        728,
+        240
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"subject\"].toLowerCase()}}",
+              "value2": "=/{{$json[\"subjectPatterns\"].toLowerCase()}}/",
+              "operation": "regex"
+            }
+          ]
+        },
+        "combineOperation": "any"
+      },
+      "typeVersion": 1,
+      "id": "1d45ab49-e006-4ab9-894e-11df36cd20c5"
+    },
+    {
+      "name": "Setup Variables",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        548,
+        240
+      ],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "subjectPatterns",
+              "value": "(expenses|reciept)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "typeVersion": 1,
+      "id": "1e832e22-9c8a-4da5-b967-b442542116b8"
+    },
+    {
+      "name": "Check for new emails",
+      "type": "n8n-nodes-base.emailReadImap",
+      "position": [
+        368,
+        240
+      ],
+      "parameters": {
+        "format": "resolved",
+        "mailbox": "Inbox",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "typeVersion": 1,
+      "id": "6ab793ee-a263-4f02-8148-a5fa6d3a2c31"
+    },
+    {
+      "name": "Read Receipts",
+      "type": "n8n-nodes-base.mindee",
+      "position": [
+        948,
+        220
+      ],
+      "parameters": {
+        "binaryPropertyName": "attachment_0"
+      },
+      "typeVersion": 1,
+      "id": "0de940db-58ea-4857-ad8e-2a9e9c290ec6"
+    },
+    {
+      "name": "Set column data",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1128,
+        220
+      ],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Date",
+              "value": "={{$json[\"date\"]}}"
+            },
+            {
+              "name": "Description",
+              "value": "={{$node[\"Check for new emails\"].json[\"subject\"].split(\"-\")[1]}}"
+            },
+            {
+              "name": "Category",
+              "value": "={{$json[\"category\"]}}"
+            },
+            {
+              "name": "Currency",
+              "value": "={{$json[\"currency\"]}}"
+            },
+            {
+              "name": "Amount",
+              "value": "={{$json[\"total\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "typeVersion": 1,
+      "id": "1a5cb25b-e822-4248-a6b8-f6cc10f79b85"
+    },
+    {
+      "name": "Add to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1308,
+        220
+      ],
+      "parameters": {
+        "range": "A:E",
+        "options": {},
+        "sheetId": "1xAtx1ORZYKu4urgqpOe3DawFjiWeOZO0VCVvOlQYnaE",
+        "operation": "append",
+        "authentication": "oAuth2"
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZreDqNfTCjkYYjcP",
+          "name": "Google Sheets account"
+        }
+      },
+      "typeVersion": 1,
+      "id": "af2f5c28-098c-4135-88a5-b412f2360c24"
+    }
+  ],
+  "connections": {
+    "Check subject": {
+      "main": [
+        [
+          {
+            "node": "Read Receipts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Receipts": {
+      "main": [
+        [
+          {
+            "node": "Set column data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set column data": {
+      "main": [
+        [
+          {
+            "node": "Add to Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setup Variables": {
+      "main": [
+        [
+          {
+            "node": "Check subject",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for new emails": {
+      "main": [
+        [
+          {
+            "node": "Setup Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "meta": {
+    "templateId": "1466"
+  },
+  "pinData": {},
+  "versionId": "f318fe6c-63aa-45a4-9319-6d3ffbdeb744",
+  "triggerCount": 0,
+  "tags": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "placeholder-workflow-id",
+  "name": "Placeholder Workflow",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "id": "placeholder-node-id",
+      "name": "Placeholder Node",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {},
+      "typeVersion": 1
+    }
+  ],
+  "connections": {},
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "updatedAt": "2025-01-01T00:00:00.000Z",
+  "settings": {},
+  "staticData": null,
+  "meta": {},
+  "pinData": {},
+  "versionId": "placeholder-version-id",
+  "triggerCount": 0,
+  "tags": []
+}

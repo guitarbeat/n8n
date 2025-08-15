@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:35:46.141Z",
+  "updatedAt": "2025-08-15T19:35:46.141Z",
+  "id": "Bgi6KuGft0SvNuSI",
+  "name": "gmail-ai-auto-responder:-create-draft-replies-to-incoming-emails.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "0a37561e-39e8-42e0-a741-bb35aba90779",
+  "triggerCount": 0,
+  "tags": []
+}

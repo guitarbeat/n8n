@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:35:46.134Z",
+  "updatedAt": "2025-08-15T19:35:46.134Z",
+  "id": "egJz0JjZ09Rwjjcd",
+  "name": "my-workflow.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "d324be19-c731-40ef-9bee-0731c2c3015b",
+  "triggerCount": 0,
+  "tags": []
+}

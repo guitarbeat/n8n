@@ -1,0 +1,17 @@
+{
+  "createdAt": "2025-08-15T19:48:03.616Z",
+  "updatedAt": "2025-08-15T19:48:03.616Z",
+  "id": "0uomZj6g7xxvmFtl",
+  "name": "build-a-financial-documents-assistant-using-qdrant-and-mistral.ai.json",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "e22a63e5-4225-4e36-b4eb-283e6506a727",
+  "triggerCount": 0,
+  "tags": []
+}

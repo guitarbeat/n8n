@@ -9,9 +9,9 @@ repos:
         files: ^workflow/.*\.json$
         pass_filenames: false
         always_run: true
-        stages: [commit]
+        stages: [pre-commit]
         description: "Validates n8n workflow JSON files for structural integrity"
-        
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:

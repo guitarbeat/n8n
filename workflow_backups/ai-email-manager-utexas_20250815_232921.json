@@ -1,0 +1,809 @@
+{
+  "createdAt": "2025-08-12T19:39:37.349Z",
+  "updatedAt": "2025-08-15T06:54:20.000Z",
+  "id": "IN7XJcoap7gd98M1",
+  "name": "AI Email Manager (utexas)",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "labelIds": [],
+          "q": "in:inbox -from:me newer_than:14d  -label:ai-processed"
+        }
+      },
+      "id": "c26d055b-4bd4-4320-a125-e1d8edaa2709",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "position": [
+        -2352,
+        144
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "id": "3aa47e66-4441-4cab-97a3-fe6803b2adab",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        -2128,
+        144
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "37305aa3-1ff6-4408-9115-9f97befd75ae"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 512,
+          "temperature": 0
+        }
+      },
+      "id": "72d474d0-fde9-4da8-8d8b-e184186dc6c3",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        -1904,
+        368
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "J4oGy4Ra3BdgP6Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to get all existing Gmail labels with their IDs and names",
+        "resource": "label",
+        "returnAll": true
+      },
+      "id": "56ff95e7-ce0e-4077-a8a5-d5be9f706f21",
+      "name": "Gmail Read Labels",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        -1536,
+        544
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "c34f2c23-d87a-4b0c-b280-f0a497d618bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to search for emails from a specific sender to check email history",
+        "operation": "getAll",
+        "returnAll": "={{ $fromAI('Return_All', 'Return all results or limit', 'boolean') }}",
+        "filters": {
+          "q": "=from:{{ $fromAI('email', 'Sender email address to search for') }}"
+        }
+      },
+      "id": "2424950b-9eff-4ef1-bb60-801baf7d0f8b",
+      "name": "Get Email History",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        -1520,
+        368
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "9cf58ce3-1179-466f-b8d3-acf124554d90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to check emails you've sent to a specific recipient",
+        "operation": "getAll",
+        "filters": {
+          "labelIds": [
+            "SENT"
+          ],
+          "q": "=to:{{ $fromAI('email', 'Recipient email address to search for') }}"
+        }
+      },
+      "id": "eaf025f1-fee5-4d54-be86-e1cda40e38b8",
+      "name": "Check Sent History",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        -1552,
+        720
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "4821fc71-6197-4280-810e-7ea7635a568f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to add labels to a Gmail message",
+        "operation": "addLabels",
+        "messageId": "={{ $fromAI('message_id', 'Gmail message ID') }}",
+        "labelIds": "={{ $fromAI('label_ids', 'Array of label IDs to add') }}"
+      },
+      "id": "55d12e5c-58d4-4ffe-a5a6-06936fed76ca",
+      "name": "Gmail Add Labels",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        -1360,
+        480
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "998d629e-0f9d-46e0-ade7-a761a54a1ba3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Classify and label this email:\n{{ JSON.stringify($json) }}",
+        "options": {
+          "systemMessage": "You are an advanced email classification agent. **Your email address:** aaronlorenzowoods@gmail.com\n\n**CRITICAL WORKFLOW:**\n1. **Get Available Labels** - Use Gmail Read Labels tool\n2. **Check Email History** - Use Get Email History tool for sender context\n3. **Check Sent History** - Use Check Sent History tool for relationship context\n4. **Analyze & Classify** - Apply unified FYI logic below\n5. **Apply Label** - Use Gmail Add Labels tool (or Create New Label only if ABSOLUTELY necessary)\n\n**UNIFIED CLASSIFICATION LOGIC:**\n**Core Principle:** Default to FYI (Label_18) for all non-actionable content. Only use specialized labels for truly exceptional cases.\n\n**ALWAYS APPLY THESE FIRST (order-sensitive):**\n1. Meeting/calendar content → Meeting Update (Label_21)\n3. Reply threads (Re:/Fwd:/In-Reply-To) → To Respond (Label_20)\n\n**ALL OTHER EMAILS CLASSIFY AS:**\n→ FYI (Label_18)  \n*Includes but not limited to:*\n- Newsletters (subscribed/unsubscribed)\n- Service updates (known/unknown senders)\n- System notifications\n- Promotional content\n- Informational broadcasts\n- Business opportunities without personal action required\n- Content with List-Unsubscribe headers\n\n**LABEL CREATION RULES:**\n- Avoid creating new labels unless email fundamentally doesn't fit ANY existing category\n- Never create labels for Marketing/Newsletter/Notification subtypes\n- New labels must follow \"AI/[UniqueDescriptor]\" format\n\n**TOOL USAGE PRIORITY:**\n1. Apply classification logic FIRST\n2. Use history tools ONLY for ambiguity resolution\n3. Never run tools when classification is clear from content\n\n**RESPONSE CLASSIFICATION GUIDANCE:**\n- To Respond: When the email content suggests or requires a personal response from you\n- FYI: When the email is informational only, even if it's part of a thread\n-Use context clues: direct questions, requests for action, personal engagement expected",
+          "maxIterations": 8
+        }
+      },
+      "id": "954ba3b5-a85a-4924-97bd-0bb4a12e7183",
+      "name": "Email Classifier Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -1600,
+        144
+      ],
+      "typeVersion": 1.9
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.id }}"
+      },
+      "id": "775ff28f-5edc-47ec-acc3-19acbac1686c",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        -1728,
+        368
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $node[\"Gmail Trigger\"].json[\"id\"] }}",
+        "labelIds": [
+          "Label_19"
+        ]
+      },
+      "id": "5bf22b22-fc00-4463-81f9-0a811e7f3ffe",
+      "name": "Mark as Processed",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -1248,
+        144
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "ad2687c3-45b6-4b26-bb0d-60833bb3ae1c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.labelIds }}.toString()",
+              "rightValue": "Label_20",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "id": "41910278-d37d-4713-9836-d08be8b7ae32"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "450c5eb9-33e0-4575-81de-e12c02d49805",
+      "name": "Check if To Respond",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -928,
+        -64
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "id": "45c167a3-ecf2-4e57-918c-7b44b583f0f0",
+      "name": "Draft Gemini Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        -720,
+        64
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "J4oGy4Ra3BdgP6Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Draft a professional email reply for the following message.\n\nOriginal Email\n- From: {{ $json.from || $json.sender || '' }}\n- Subject: {{ $json.subject || '' }}\n- Body:\n{{ ($json.text || $json.snippet || '').trim() }}\n\nReply Requirements\n- Respond as Aaron Lorenzo Woods.\n- Address the sender’s concrete questions/requests first.\n- If information is missing, ask at most one concise clarifying question.\n- If scheduling is requested, propose 2–3 specific time windows with timezone.\n- Plain text only (no markdown), short paragraphs, ≤ 180 words.\n- Do not invent facts, links, prices, or commitments.\n\nOutput format (return ONLY JSON, no prose, no code fences):\n{\n  \"subject\": \"Re: [original subject]\"  // if subject already begins with \"Re:\", keep as-is\n  \"message\": \"[draft email body]\"\n}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You draft reply emails on behalf of Aaron Lorenzo Woods (aaronlorenzowoods@gmail.com).\n\nRules\n- Tone: professional, helpful, and concise.\n- Content: address each concrete question or request; if data is missing, ask one concise clarifying question.\n- Scheduling: when relevant, propose 2–3 specific options including timezone.\n- Safety: do not fabricate details, links, prices, or commitments.\n- Style: plain text only; no markdown; short paragraphs.\n- Signature: end with \"Best regards,\\nAaron Lorenzo Woods\".\n\nOutput\nReturn ONLY strict JSON with keys:\n{\n  \"subject\": \"Re: [original subject or concise equivalent]\",\n  \"message\": \"[plain text body, <= 180 words]\"\n}\nNo explanations, no extra fields, no code fences.",
+          "maxIterations": 3
+        }
+      },
+      "id": "68ac4775-b700-45c2-b205-2d4ad8f9e560",
+      "name": "Draft Generator Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -704,
+        -160
+      ],
+      "typeVersion": 1.9
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $json.output.subject }}{{ $('Gmail Trigger').item.json.Subject }}",
+        "message": "={{ $json.output.message }}",
+        "options": {
+          "threadId": "={{ $json.threadId || $('Email Classifier Agent').item.json.threadId || $('Gmail Trigger').item.json.threadId }}",
+          "sendTo": "={{ $('Gmail Trigger').item.json.To }}"
+        }
+      },
+      "id": "9e0e3c40-d6a0-4d8e-acbf-4b0958063700",
+      "name": "Create Draft",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -208,
+        -176
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "0aa2f994-7e2d-4036-8f2b-4df8622dbc98",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to create new Gmail labels when existing labels don't match the email category",
+        "resource": "label",
+        "operation": "create",
+        "name": "={{ $fromAI('new_label_name', 'Name for the new label to create') }}",
+        "options": {}
+      },
+      "id": "9260947e-7540-4c41-9b4a-d38f07bcfffd",
+      "name": "Create New Label",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        -1376,
+        656
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "58c1524d-1f5a-4423-9851-e9e5b7235818",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "732404796622538",
+        "recipientPhoneNumber": "9158610396",
+        "textBody": "=📧 *New Email Draft Created*\n\n*From:* {{ $('Email Classifier Agent').item.json.From }}\n*Subject:* {{ $('Email Classifier Agent').item.json.Subject }}\n*Classification:* To Respond\n\n*Draft Preview:*\n{{ $json.output.message.substring(0, 200) }}...\n\n✅ Ready for review in Gmail",
+        "additionalFields": {}
+      },
+      "id": "d7ed0429-b799-494e-a7e4-7394826087d8",
+      "name": "WhatsApp Draft Notification",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        -32,
+        -144
+      ],
+      "typeVersion": 1,
+      "webhookId": "5be5cd83-856b-4788-9cde-cc2e40a65ebf",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "FmV9Bw5YjjdJD25x",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 512,
+          "temperature": 0
+        }
+      },
+      "id": "94e973dc-1c38-4d26-8bca-d733eca9b49b",
+      "name": "Marketing Gemini Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        -736,
+        608
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "J4oGy4Ra3BdgP6Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.labelIds }}.toString()",
+              "rightValue": "Label_18",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "id": "c25375b9-225c-4d48-8823-86ec7997fb5b"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "61d139ff-23fe-4424-a32e-8712c27dda92",
+      "name": "Check if FYI",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -928,
+        352
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"subject\": \"Re: Product roadmap meeting\",\n  \"message\": \"Hi Jordan,\\n\\nThanks for sharing the draft roadmap. I’m happy to review and align on priorities.\\n\\nCould we meet on Wed 2:00–2:30 PM PT, Thu 10:00–10:30 AM PT, or Fri 1:00–1:30 PM PT? If those don’t work, please suggest a few times that do.\\n\\nBefore we meet, could you confirm which metrics you’d like highlighted so I can prepare the latest numbers?\\n\\nBest regards,\\nAaron Lorenzo Woods\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -480,
+        16
+      ],
+      "id": "227b55b7-dc7d-4748-8454-1c4683087294",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.output.mark_as_read }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              },
+              "id": "613880b1-e04f-47e7-b56e-9aeddef64c73"
+            },
+            {
+              "id": "da75ff90-6994-4507-9c6e-dfccc6df7593",
+              "leftValue": "={{ $json.should_mark_read }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "444bf6a1-a652-4dcb-8963-a05034768e0f",
+      "name": "Check Mark as Read",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -192,
+        352
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('Email Classifier Agent').item.json.id }}"
+      },
+      "id": "87c09879-b7d6-42b9-8c3d-df358b2a19cd",
+      "name": "Mark as Read",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        32,
+        352
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "c4e884f6-d6c0-4c06-9fcb-04761dd0edf1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "doMjXPMyMIdJedFd",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Step 1: Extract the raw JSON string (remove Markdown fences)\nconst rawJsonString = $input.first().json.output.replace(/```json\\n|\\n```/g, '').trim()\n// Step 2: Parse the JSON string\nconst parsedOutput = JSON.parse(rawJsonString);\n\n// Step 3: Return the mark_as_read value\nreturn {\n  should_mark_read: parsedOutput.mark_as_read // true/false\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -400,
+        352
+      ],
+      "id": "3c58ba0e-c84e-4f1e-93fe-061f74fee48a",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this FYI email:\n\nFrom: {{ $json.from }}\nSubject: {{ $json.subject }}\nBody: {{ $json.text || $json.snippet }}\n\nDetermine if this promotion is worth exploring.",
+        "options": {
+          "systemMessage": "You are an FYI email processor. All incoming emails are confirmed as \"read when convenient\" content. Your task:\n\n1. **Summarize**: Extract core information (1 sentence max)\n2. **Mark Read Decision**: Should this be marked read immediately? \n\nReturn JSON format:\n{\n  \"summary\": \"Concise description of content\",\n  \"mark_as_read\": true/false\n}\n\n**ALWAYS mark as read (true) UNLESS:**\n- Contains time-sensitive elements (e.g., \"limited time offer\", \"deadline approaching\")\n- References ongoing projects/work\n- Includes personal name/context beyond generic greeting\n- Mentions upcoming events you're attending\n- Requires future action (even if non-urgent)\n\n**Default to true** - When in doubt, mark read.\n\n**Summary guidelines:**\n- Ignore marketing fluff\n- Focus on factual content\n- Preserve numbers/dates/names\n- 15 words maximum",
+          "maxIterations": 3
+        }
+      },
+      "id": "6436ab87-8dad-4333-bfe4-e6998a334451",
+      "name": "FYI Analyzer Agent1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -704,
+        320
+      ],
+      "typeVersion": 1.9
+    }
+  ],
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Read Labels": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Email History": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Sent History": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Add Labels": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Classifier Agent": {
+      "main": [
+        [
+          {
+            "node": "Mark as Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as Processed": {
+      "main": [
+        [
+          {
+            "node": "Check if To Respond",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check if FYI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if To Respond": {
+      "main": [
+        [
+          {
+            "node": "Draft Generator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft Generator Agent": {
+      "main": [
+        [
+          {
+            "node": "Create Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft Gemini Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Draft Generator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Label": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Classifier Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Draft": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Draft Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marketing Gemini Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "FYI Analyzer Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if FYI": {
+      "main": [
+        [
+          {
+            "node": "FYI Analyzer Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Draft Generator Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Mark as Read": {
+      "main": [
+        [
+          {
+            "node": "Mark as Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Check Mark as Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FYI Analyzer Agent1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": {
+    "node:Gmail Trigger": {
+      "Gmail Trigger": {
+        "lastTimeChecked": 1755236646,
+        "possibleDuplicates": [
+          "198ac41c3848189b"
+        ]
+      }
+    }
+  },
+  "meta": {
+    "templateId": "4722",
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "f908ed49-fb02-458e-be88-903aabbb3db8",
+  "triggerCount": 1,
+  "tags": [
+    "Email"
+  ]
+}
